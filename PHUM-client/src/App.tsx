@@ -1,12 +1,9 @@
 import './App.css'
+import Mainlayout from './components/layout/Mainlayout'
 
-function App() {
+function App () {
 
-  return (
-    <>
-      <p>This is university management web application</p>
-    </>
-  )
+  return <Mainlayout />
 }
 
 export default App

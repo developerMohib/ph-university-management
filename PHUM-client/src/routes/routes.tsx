@@ -3,12 +3,24 @@ import App from "../App";
 import Register from "../pages/auth/Register";
 import SignIn from "../pages/auth/SignIn";
 import NotFound from "../pages/notFound/NotFound";
+import About from "../pages/about/About";
+import Contact from "../pages/contact/Contact";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <NotFound />,
+    children: [
+      {
+        path: "about",
+        element: <About />
+      },
+      {
+        path: "contact",
+        element: <Contact />
+      }
+    ]
   },
   {
     path: "/sign-in",
