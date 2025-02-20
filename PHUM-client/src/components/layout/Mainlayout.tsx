@@ -6,22 +6,26 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps['items'] = [
     {
-        key: '1',
-        label: 'User Management'
+        key: 'Dashboard',
+        label: <NavLink to= "/admin/dashboard" >Dashboard</NavLink>
     },
     {
-        key: '2',
-        label: 'Dashboard',
+        key: 'User Management',
+        label: 'User Management',
         children: [
             {
-                key: '11',
-                label: <NavLink to='/about' >About</NavLink>,
+                key: 'Create Admin',
+                label: <NavLink to='/admin/create-admin' >Create Admin</NavLink>,
             },
             {
-                key: '12',
-                label: <NavLink to='/contact' >Contact</NavLink>
+                key: 'Create Faculty',
+                label: <NavLink to='/admin/create-faculty' >Create Faculty</NavLink>
             },
-        ]
+            {
+                key: 'Create Student',
+                label: <NavLink to='/admin/create-student' >Create Student</NavLink>
+            },
+        ],
     },
 ];
 
@@ -39,7 +43,7 @@ const Mainlayout: React.FC = () => {
                     console.log(collapsed, type);
                 }}
             >
-                <div style={{ color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '4rem', fontWeight: 'bold' }} >PH University</div>
+                <div style={{ color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '4rem', fontWeight: 'bold' }} >PH University</div>                
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
             </Sider>
             <Layout>
@@ -55,7 +59,7 @@ const Mainlayout: React.FC = () => {
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    All Right Reserved ©{new Date().getFullYear()} Created by PH University
                 </Footer>
             </Layout>
         </Layout>

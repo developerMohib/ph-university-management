@@ -2,7 +2,7 @@
 const CreateAdmin : React.FC = () => {
     return (
         <div>
-            <h1>Create student </h1>
+            <h1>Create Admin </h1>
         </div>
     );
 };

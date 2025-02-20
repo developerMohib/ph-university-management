@@ -5,10 +5,7 @@ import SignIn from "../pages/auth/SignIn";
 import NotFound from "../pages/notFound/NotFound";
 import About from "../pages/about/About";
 import Contact from "../pages/contact/Contact";
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateStudent from "../pages/admin/CreateStudent";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
+import { adminPaths } from "./admin.routes";
 
 export const router = createBrowserRouter([
   {
@@ -31,24 +28,19 @@ export const router = createBrowserRouter([
     path: "/admin",
     element : <App />,
     errorElement: <NotFound />,
-    children: [          
-      {
-        path: "dashboard",
-        element: <AdminDashboard />
-      },    
-      {
-        path: "create-admin",
-        element: <CreateAdmin />
-      },    
-      {
-        path: "create-faculty",
-        element: <CreateFaculty />
-      },    
-      {
-        path: "create-student",
-        element: <CreateStudent />
-      },    
-    ]
+    children: adminPaths,
+  },
+  {
+    path: "/faculty",
+    element : <App />,
+    errorElement: <NotFound />,
+    children: adminPaths,
+  },
+  {
+    path: "/student",
+    element : <App />,
+    errorElement: <NotFound />,
+    children: adminPaths,
   },
   {
     path: "/sign-in",
