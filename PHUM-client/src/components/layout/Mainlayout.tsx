@@ -1,7 +1,8 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router-dom';
-import { adminSidebarRoutes } from '../../routes/admin.routes';
+import { sidebarGenerator } from '../../utils/sidebarGenerator';
+import { adminPaths } from '../../routes/admin.routes';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -45,7 +46,7 @@ const Mainlayout: React.FC = () => {
                 }}
             >
                 <div style={{ color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '4rem', fontWeight: 'bold' }} >PH University</div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={adminSidebarRoutes} />
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={sidebarGenerator(adminPaths, 'admin')} />
             </Sider>
             <Layout>
                 <Header style={{ padding: 0 }} />
