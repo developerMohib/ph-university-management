@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
@@ -12,10 +13,15 @@ import CreateStudent from "../pages/admin/CreateStudent";
  * element => actual element
  */
 
-export const adminPaths2 = [
+interface IRoute {
+    path : string,
+    element :ReactNode,
+}
+
+export const adminPaths = [
     {
         name: 'Dashboard',
-        path: '/admin/dashboard',
+        path: 'dashboard',
         element: <AdminDashboard />
     },
     {
@@ -23,17 +29,17 @@ export const adminPaths2 = [
         children: [
             {
                 name: 'Create Admin',
-                path: '/admin/create-admin',
+                path: 'create-admin',
                 element: <CreateAdmin />
             },
             {
                 name: 'Create Faculty',
-                path: '/admim/create-faculty',
+                path: 'create-faculty',
                 element: <CreateFaculty />
             },
             {
                 name: 'Create Student',
-                path: '/admin/create-student',
+                path: 'create-student',
                 element: <CreateStudent />
             },
         ]
@@ -42,30 +48,46 @@ export const adminPaths2 = [
         name: 'Course Management',
         children: [
             {
-                name: 'Create Admin',
-                path: '/admin/create-admin',
+                name: 'Course Create',
+                path: 'course-create',
                 element: <CreateAdmin />
             },
         ]
     },
 
 ]
-
-export const adminPaths = [
-    {
-        path: "dashboard",
-        element: <AdminDashboard />
-    },
-    {
-        path: "create-admin",
-        element: <CreateAdmin />
-    },
-    {
-        path: "create-faculty",
-        element: <CreateFaculty />
-    },
-    {
-        path: "create-student",
-        element: <CreateStudent />
-    },
-]
+export const adminRoutes = adminPaths.reduce((acc : IRoute[], item) => {
+    if (item.path && item.element) {
+        acc.push({
+            path: item.path,
+            element: item.element
+        })
+    }
+    if (item.children) {
+        item.children.forEach((child)=>{
+            acc.push({
+                path: child.path,
+                element: child.element
+            })
+        })
+    }
+    return acc
+}, [])
+// export const adminPaths = [
+//     {
+//         path: "dashboard",
+//         element: <AdminDashboard />
+//     },
+//     {
+//         path: "create-admin",
+//         element: <CreateAdmin />
+//     },
+//     {
+//         path: "create-faculty",
+//         element: <CreateFaculty />
+//     },
+//     {
+//         path: "create-student",
+//         element: <CreateStudent />
+//     },
+// ]

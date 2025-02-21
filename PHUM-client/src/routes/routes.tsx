@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     // element: <Mainlayout />,
-    element : <App />,
+    element: <App />,
     errorElement: <NotFound />,
     children: [
       {
@@ -26,19 +26,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element : <App />,
+    element: <App />,
     errorElement: <NotFound />,
     children: adminPaths,
   },
   {
     path: "/faculty",
-    element : <App />,
+    element: <App />,
     errorElement: <NotFound />,
     children: adminPaths,
   },
   {
     path: "/student",
-    element : <App />,
+    element: <App />,
     errorElement: <NotFound />,
     children: adminPaths,
   },
