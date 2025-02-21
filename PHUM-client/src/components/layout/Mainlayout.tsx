@@ -3,6 +3,8 @@ import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { sidebarGenerator } from '../../utils/sidebarGenerator';
 import { adminPaths } from '../../routes/admin.routes';
+import { facultyPaths } from '../../routes/faculty.routes';
+import { studentPaths } from '../../routes/student.route';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -31,8 +33,31 @@ const { Header, Content, Footer, Sider } = Layout;
 //     },
 // ];
 
+type TUserRole = {
+    ADMIN: string, FACULTY: string, STUDENT: string
+}
 
 const Mainlayout: React.FC = () => {
+    const userRole: TUserRole = {
+        ADMIN: 'admin', FACULTY: 'faculty', STUDENT: 'student'
+    }
+    const role = 'faculty'
+    let sidebarPathItems;
+
+    switch (role) {
+        case userRole.ADMIN:
+            sidebarPathItems = sidebarGenerator(adminPaths, 'admin')
+            break;
+        case userRole.FACULTY:
+            sidebarPathItems = sidebarGenerator(facultyPaths, 'faculty')
+            break;
+        case userRole.STUDENT:
+            sidebarPathItems = sidebarGenerator(studentPaths, 'student')
+            break;
+        default:
+            break;
+    }
+
     return (
         <Layout style={{ height: "100vh" }}>
             <Sider
@@ -46,7 +71,7 @@ const Mainlayout: React.FC = () => {
                 }}
             >
                 <div style={{ color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '4rem', fontWeight: 'bold' }} >PH University</div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={sidebarGenerator(adminPaths, 'admin')} />
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={sidebarPathItems} />
             </Sider>
             <Layout>
                 <Header style={{ padding: 0 }} />
