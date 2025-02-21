@@ -3,6 +3,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
+import { NavLink } from "react-router-dom";
 
 /**
  * routes and sidebar combined 
@@ -14,11 +15,16 @@ import CreateStudent from "../pages/admin/CreateStudent";
  */
 
 interface IRoute {
-    path : string,
-    element :ReactNode,
+    path: string,
+    element: ReactNode,
+}
+interface ISidebar {
+    key: string,
+    label: ReactNode,
+    children?: ISidebar[]
 }
 
-export const adminPaths = [
+const adminPaths = [
     {
         name: 'Dashboard',
         path: 'dashboard',
@@ -56,7 +62,7 @@ export const adminPaths = [
     },
 
 ]
-export const adminRoutes = adminPaths.reduce((acc : IRoute[], item) => {
+export const adminRoutes = adminPaths.reduce((acc: IRoute[], item) => {
     if (item.path && item.element) {
         acc.push({
             path: item.path,
@@ -64,15 +70,41 @@ export const adminRoutes = adminPaths.reduce((acc : IRoute[], item) => {
         })
     }
     if (item.children) {
-        item.children.forEach((child)=>{
+        item.children.forEach((child) => {
             acc.push({
                 path: child.path,
                 element: child.element
             })
         })
     }
-    return acc
+    return acc;
 }, [])
+
+
+export const adminSidebarRoutes = adminPaths.reduce((acc: ISidebar[], item) => {
+    if (item.name && item.path) {
+        acc.push({
+            key: item.name,
+            label: <NavLink to={`/admin/${item.path}`} > {item.name} </NavLink>
+        })
+    }
+    if (item.children) {
+        acc.push({
+            key: item.name,
+            label: item.name,
+            children: item.children.map(child => ({
+                key: child.name,
+                label: <NavLink to={`/admin/${child.path}`} > {child.name} </NavLink>
+            }))
+        })
+    }
+    return acc;
+}, [])
+
+
+
+// STATIC ADMIN ROUTES
+
 // export const adminPaths = [
 //     {
 //         path: "dashboard",

@@ -26,7 +26,7 @@ const myArray = [
     },
 ]
 
-const exampleAdminRoutes3 = myArray.reduce((acc, item) => {
+const exampleAdminRoutes = myArray.reduce((acc, item) => {
     if (item.path && item.element) {
         acc.push({
             path: item.path,
@@ -34,7 +34,7 @@ const exampleAdminRoutes3 = myArray.reduce((acc, item) => {
         })
     }
     if (item.children) {
-        item.children.forEach((child)=>{
+        item.children.forEach((child) => {
             acc.push({
                 path: child.path,
                 element: child.element
@@ -44,7 +44,25 @@ const exampleAdminRoutes3 = myArray.reduce((acc, item) => {
     return acc
 }, [])
 
-
+const exampleAdminSidebarRoutes = myArray.reduce((acc, item) => {
+    if (item.name && item.path) {
+        acc.push({
+            key: item.name,
+            label: 'navlink'
+        })
+    }
+    if (item.children) {
+        acc.push({
+            key: item.name,
+            label: 'navlink',
+            children: item.children.map(child => ({
+                key: child.name,
+                label: 'navlink'
+            }))
+        })
+    }
+    return acc;
+}, [])
 
 // To Run this array in js file inidividual => go to path and write node routeExample.js
-console.log(exampleAdminRoutes3);
+console.log('is this', JSON.stringify(exampleAdminSidebarRoutes));
